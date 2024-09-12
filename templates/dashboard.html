@@ -8,6 +8,7 @@
     <h2>Welcome, {{ user.username }}</h2>
     <p>Your API key: {{ user.api_key }}</p>
     <p><a href="/openapi/{{ user.id }}">View OpenAPI Spec</a></p>
+    <p><a href="/account">Account Settings</a></p> <!-- New link to account settings -->
     <form method="POST" action="/rewrite-link">
         <label>Product URL:</label><br>
         <input type="text" name="product_url" required><br>

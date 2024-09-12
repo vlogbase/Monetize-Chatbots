@@ -29,11 +29,8 @@ def register():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
-        skimlinks_id = request.form['skimlinks_id']
-        shorten_links = 'shorten_links' in request.form
-
         hashed_password = generate_password_hash(password, method='sha256')
-        new_user = User(username=username, password=hashed_password, skimlinks_id=skimlinks_id, shorten_links=shorten_links, api_key=generate_api_key())
+        new_user = User(username=username, password=hashed_password, api_key=generate_api_key())
         db.session.add(new_user)
         db.session.commit()
 
@@ -123,6 +120,23 @@ def openapi_spec(user_id):
         }
     }
     return jsonify(openapi_spec)
+
+# Account settings page
+@app.route('/account', methods=['GET', 'POST'])
+@login_required
+def account_settings():
+    if request.method == 'POST':
+        skimlinks_id = request.form.get('skimlinks_id')
+        shorten_links = 'shorten_links' in request.form
+
+        # Update user details
+        current_user.skimlinks_id = skimlinks_id
+        current_user.shorten_links = shorten_links
+        db.session.commit()
+        
+        return redirect(url_for('dashboard'))
+
+    return render_template('account.html', user=current_user)
 
 if __name__ == '__main__':
     app.run(debug=True)

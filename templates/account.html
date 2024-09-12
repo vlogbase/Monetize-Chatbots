@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Account Settings</title>
+    <link rel="stylesheet" type="text/css" href="/static/styles.css">
+</head>
+<body>
+    <h2>Account Settings for {{ user.username }}</h2>
+    <form method="POST">
+        <label>Skimlinks Publisher ID:</label><br>
+        <input type="text" name="skimlinks_id" value="{{ user.skimlinks_id }}"><br>
+        
+        <label>Shorten Links?</label>
+        <input type="checkbox" name="shorten_links" {% if user.shorten_links %} checked {% endif %}><br>
+
+        <button type="submit">Update</button>
+    </form>
+    <p><a href="/dashboard">Back to Dashboard</a></p>
+</body>
+</html>
