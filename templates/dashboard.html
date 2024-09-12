@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+    <link rel="stylesheet" type="text/css" href="/static/styles.css">
+</head>
+<body>
+    <h2>Welcome, {{ user.username }}</h2>
+    <p>Your API key: {{ user.api_key }}</p>
+    <p><a href="/openapi/{{ user.id }}">View OpenAPI Spec</a></p>
+    <form method="POST" action="/rewrite-link">
+        <label>Product URL:</label><br>
+        <input type="text" name="product_url" required><br>
+        <button type="submit">Rewrite Link</button>
+    </form>
+    <p><a href="/logout">Logout</a></p>
+</body>
+</html>
