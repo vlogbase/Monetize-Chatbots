@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Dashboard</h2>
+<form method="post">
+    <label>Publisher ID (optional):</label><br>
+    <input type="text" name="publisher_id" value="{{ user.publisher_id }}"><br>
+    <label>Site ID (optional):</label><br>
+    <input type="text" name="site_id" value="{{ user.site_id }}"><br>
+    <label>Custom ID (optional):</label><br>
+    <input type="text" name="custom_id" value="{{ user.custom_id }}"><br>
+    <button type="submit">Save</button>
+</form>
+
+{% if user.api_key %}
+    <p>Your API Key: <strong>{{ user.api_key }}</strong></p>
+    <a href="{{ url_for('generate_openapi') }}">Download OpenAPI Specification</a>
+{% else %}
+    <p>Click save to generate your API key and OpenAPI spec.</p>
+{% endif %}
+
+<p>You need a Skimlinks account to monetize your chatbot. If you don’t have one, get one <a href="http://go.skimlinks.com/?id=44501X1564933&xs=1&url=http://skimlinks.com">here</a>.</p>
+{% endblock %}

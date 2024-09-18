@@ -1,0 +1,40 @@
+openapi: 3.1.0
+info:
+  title: Monetize Chatbots API
+  version: 1.0.0
+servers:
+  - url: https://monetizechatbots.azurewebsites.net  # Replace with your Azure domain
+paths:
+  /api/convert:
+    post:
+      operationId: convertUrl  # Added operationId
+      summary: Convert URL to affiliate link
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                url:
+                  type: string
+                  example: "https://example.com"
+      responses:
+        '200':
+          description: Successful conversion
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  affiliate_url:
+                    type: string
+      security:
+        - api_key: []
+components:
+  schemas: {}  # Added empty schemas object
+  securitySchemes:
+    api_key:
+      type: apiKey
+      name: Authorization
+      in: header
